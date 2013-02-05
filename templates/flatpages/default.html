@@ -3,10 +3,14 @@
 		<title>{{ flatpage.title }}</title>
 	</head>
 	<body>
+		<form method="get" action="/search/">
+			<p>
+			<label for="id_q">Search:</label>
+			<input type="text" name="q" id="id_q" />
+			<input type="submit" value="Submit" />
+			</p>
+		</form>
 		<h1>{{ flatpage.title }}</h1>
-		<strong>The url for this page is {{ flatpage.url }}</strong>
-		<br />
-		<em>Comments are enabled --> {{ flatpage.enable_comments }}</em>
-		<br />
 		{{ flatpage.content }}
+	</body>
 </html>
