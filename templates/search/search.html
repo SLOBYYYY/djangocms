@@ -3,11 +3,34 @@
 		<title>Search</title>
 	</head>
 	<body>
+		<form method="get" action="/search/">
+			<p>
+			<label for="id_q">Search:</label>
+			<input type="text" name="q" id="id_q" value="{{ query }}" />
+			<input type="submit" value="Submit" />
+			</p>
+		</form>
+		{% if keyword_results or results %}
 		<p>Your search expression was: {{ query }}</p>
+		{% if keyword_results %}
+		<p>Recommended pages:</p>
+		<ul>
+			{% for page in keyword_results %}
+			<li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
+			{% endfor %}
+		</ul>
+		{% endif %}
 		<ul>
 			{% for page in results %}
 			<li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
 			{% endfor %}
 		</ul>
+		{% else %}
+			{% if query %}
+			<p>No results were found</p>
+			{% else %}
+			<p>Search please</p>
+			{% endif %}
+		{% endif %}
 	</body>
 </html>
